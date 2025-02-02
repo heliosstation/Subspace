@@ -1,13 +1,33 @@
 {
   description = "Subspace: Helios Station system configuration";
+
+  # The nixConfig here only affects the flake itself, not the system configuration!
+  # For more information, see:
+  # https://nixos-and-flakes.thiscute.world/nix-store/add-binary-cache-servers
+  nixConfig = {
+    # Additional substituters for fetching packages
+    extra-substituters = [
+      "https://nix-community.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
+  };
+
   inputs = {
+    # NixOS package source, using unstable branch by default
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
     
     # Secret Management with age
     agenix.url = "github:ryantm/agenix";
 
     # Manager user configuration
-    home-manager.url = "github:nix-community/home-manager";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Manage MacOS configuration
     darwin = {
@@ -46,9 +66,17 @@
       url = "git+ssh://git@github.com/heliosstation/Section31.git";
       flake = false;
     };
+
+    nur-heliosstation.url = "git+ssh://git@github.com/heliosstation/SubspaceNUR";
+
+    # Haumea maps a directory of Nix files into an attribute set
+    haumea = {
+      url = "github:nix-community/haumea/v0.2.2";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, darwin, nix-homebrew, homebrew-bundle, homebrew-core, homebrew-cask, home-manager, homebrew-services, nixpkgs, agenix, secrets } @inputs:
+  outputs = { self, darwin, nix-homebrew, homebrew-bundle, homebrew-core, homebrew-cask, home-manager, homebrew-services, nixpkgs, agenix, secrets, ...} @inputs:
     let
       user = "helios";
       linuxSystems = [ "x86_64-linux" "aarch64-linux" ];
