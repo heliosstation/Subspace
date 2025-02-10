@@ -1,0 +1,3 @@
+{sublib, ...}: {
+  imports = sublib.scanPaths ./.;
+}
