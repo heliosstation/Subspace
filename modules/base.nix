@@ -21,6 +21,7 @@
     just
     git
     git-lfs
+    nushell
 
     # Archives
     zip
