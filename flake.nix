@@ -1,6 +1,8 @@
 {
   description = "Subspace: Helios Station system configuration";
 
+  outputs = inputs: import ./outputs inputs;
+
   # The nixConfig here only affects the flake itself, not the system configuration!
   # For more information, see:
   # https://nixos-and-flakes.thiscute.world/nix-store/add-binary-cache-servers
@@ -9,6 +11,7 @@
     extra-substituters = [
       "https://nix-community.cachix.org"
     ];
+    # Trusted public keys for the additional substituters
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];
@@ -17,9 +20,11 @@
   inputs = {
     # NixOS package source, using unstable branch by default
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # Additional NixOS package source, using unstable branch
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    # Additional NixOS package source, using stable branch
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
-    
+
     # Secret Management with age
     agenix.url = "github:ryantm/agenix";
 
@@ -29,18 +34,23 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Manage MacOS configuration
-    darwin = {
+    # Nixpkgs for Darwin (macOS)
+    nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    # Manage macOS configuration
+    nix-darwin = {
       url = "github:LnL7/nix-darwin/master";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
+
+    # NixOS hardware configurations
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     # Manage Homebrew installations declaratively
     nix-homebrew = {
       url = "github:zhaofengli-wip/nix-homebrew";
     };
 
-    # Homebre dependencies
+    # Homebrew dependencies
     homebrew-bundle = {
       url = "github:homebrew/homebrew-bundle";
       flake = false;
@@ -54,7 +64,7 @@
     homebrew-cask = {
       url = "github:homebrew/homebrew-cask";
       flake = false;
-    }; 
+    };
 
     homebrew-services = {
       url = "github:homebrew/homebrew-services";
@@ -62,62 +72,51 @@
     };
 
     # Helios Station secrets [private repository]
-    secrets = {
+    subsecrets = {
       url = "git+ssh://git@github.com/heliosstation/Section31.git";
       flake = false;
     };
 
+    # Subspace Nix User Repository
     nur-heliosstation.url = "git+ssh://git@github.com/heliosstation/SubspaceNUR";
 
-    # Haumea maps a directory of Nix files into an attribute set
+    # Lanzaboote - NixOS boot manager
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v0.4.2";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Impermanence: Makes NixOS stateless by discarding changes on reboot
+    impermanence.url = "github:nix-community/impermanence";
+
+    # Nixos-generators: Generate outputs for different targets
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Disko: Declarative disk partitioning for NixOS
+    disko = {
+      url = "github:nix-community/disko/v1.9.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Haumea: Maps a directory of Nix files into an attribute set
     haumea = {
       url = "github:nix-community/haumea/v0.2.2";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-  };
 
-  outputs = { self, darwin, nix-homebrew, homebrew-bundle, homebrew-core, homebrew-cask, home-manager, homebrew-services, nixpkgs, agenix, secrets, ...} @inputs:
-    let
-      user = "helios";
-      linuxSystems = [ "x86_64-linux" "aarch64-linux" ];
-      darwinSystems = [ "aarch64-darwin" "x86_64-darwin" ];
-      forAllSystems = f: nixpkgs.lib.genAttrs (linuxSystems ++ darwinSystems) f;
-      devShell = system: let pkgs = nixpkgs.legacyPackages.${system}; in {
-        default = with pkgs; mkShell {
-          nativeBuildInputs = with pkgs; [ bashInteractive git age age-plugin-yubikey ];
-          shellHook = with pkgs; ''
-            export EDITOR=vim
-          '';
-        };
-      };
-    in
-    {
-      devShells = forAllSystems devShell;
+    # Nixpak: Sandboxing for Nix
+    nixpak = {
+      url = "github:nixpak/nixpak";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-      darwinConfigurations = nixpkgs.lib.genAttrs darwinSystems (system:
-        darwin.lib.darwinSystem {
-          inherit system;
-          specialArgs = inputs;
-          modules = [
-            home-manager.darwinModules.home-manager
-            nix-homebrew.darwinModules.nix-homebrew
-            {
-              nix-homebrew = {
-                inherit user;
-                enable = true;
-                taps = {
-                  "homebrew/homebrew-core" = homebrew-core;
-                  "homebrew/homebrew-cask" = homebrew-cask;
-                  "homebrew/homebrew-bundle" = homebrew-bundle;
-                  "homebrew/homebrew-services" = homebrew-services;
-                };
-                mutableTaps = false;
-                autoMigrate = true;
-              };
-            }
-            ./hosts/darwin
-          ];
-        }
-      );
+    # Pre-commit hooks to format Nix code before commit
+    pre-commit-hooks = {
+      url = "github:cachix/pre-commit-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 }
