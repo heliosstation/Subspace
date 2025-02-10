@@ -118,5 +118,10 @@
       url = "github:cachix/pre-commit-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Ghostty is a fast, feature-rich, and cross-platform terminal emulator
+    ghostty = {
+      url = "github:ghostty-org/ghostty";
+    };
   };
 }
