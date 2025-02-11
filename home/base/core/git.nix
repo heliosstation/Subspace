@@ -32,6 +32,9 @@
         "ssh://git@github.com/heliosstation" = {
           insteadOf = "https://github.com/heliosstation";
         };
+        "ssh://gitea@10.69.3.8/helios" = {
+          insteadOf = "https://gitea.local.heliosstation.io/helios";
+        };
       };
     };
 
