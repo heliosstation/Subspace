@@ -38,6 +38,7 @@
       enable = true;
       git = true;
       icons = "auto";
+      enableNushellIntegration = true;
     };
 
     bat = {
@@ -77,12 +78,14 @@
       enable = true;
       enableBashIntegration = true;
       enableZshIntegration = true;
+      enableNushellIntegration = true;
     };
 
     atuin = {
       enable = true;
       enableBashIntegration = true;
       enableZshIntegration = true;
+      enableNushellIntegration = true;
     };
   };
 }
