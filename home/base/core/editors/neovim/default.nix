@@ -5,6 +5,7 @@
 
       viAlias = true;
       vimAlias = true;
+      
     };
   };
 }
