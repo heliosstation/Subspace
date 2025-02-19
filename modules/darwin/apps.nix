@@ -99,6 +99,7 @@
       "raycast"
       "stats"
       "chatgpt"
+      "aerospace"
 
       # Terminal Emulators
       # pkgs.ghostty is currently broken on darwin as of 02/09, hence we use a cask

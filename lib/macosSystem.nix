@@ -33,6 +33,7 @@ in
             "homebrew/homebrew-cask" = inputs.homebrew-cask;
             "homebrew/homebrew-bundle" = inputs.homebrew-bundle;
             "homebrew/homebrew-services" = inputs.homebrew-services;
+            "nikitabobko/homebrew-tap" = inputs.homebrew-nikitabobko;
           };
         })
       ]

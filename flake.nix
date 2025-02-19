@@ -71,6 +71,11 @@
       flake = false;
     };
 
+    homebrew-nikitabobko = {
+      url = "github:nikitabobko/homebrew-tap";
+      flake = false;
+    };
+
     # Helios Station secrets [private repository]
     subsecrets = {
       url = "git+ssh://git@github.com/heliosstation/Section31.git";
