@@ -8,8 +8,8 @@
   #
   ###################################################################################
 
-  # Auto upgrade the nix-daemon service.
-  services.nix-daemon.enable = true;
+  # nix-darwin now unconditionally manages nix-daemon when nix.enable is true
+  nix.enable = true;
 
   # Disable auto-optimise-store because of this issue:
   #   https://github.com/NixOS/nix/issues/7273
