@@ -89,6 +89,8 @@
 
       "gnu-sed"
       "gnu-tar"
+
+      "sketchybar"
     ];
 
     casks = [

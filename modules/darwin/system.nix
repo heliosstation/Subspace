@@ -79,7 +79,8 @@
       };
 
       spaces = {
-        # One space spans across all physical displays
+        # false: Each display has its own set of spaces.
+        # Required for sketchybar to work properly.
         spans-displays = false;
       };
 
@@ -114,6 +115,9 @@
         NSNavPanelExpandedStateForSaveMode2 = true;
         PMPrintingExpandedStateForPrint = true;
         PMPrintingExpandedStateForPrint2 = true;
+
+        # Hide menubar to use SketchyBar
+        _HIHideMenuBar = true;
       };
 
       WindowManager = {
@@ -179,6 +183,9 @@
       nerd-fonts.symbols-only
       nerd-fonts.fira-code
       nerd-fonts.jetbrains-mono
+      nerd-fonts.hack
+
+      sketchybar-app-font
     ];
   };
 }

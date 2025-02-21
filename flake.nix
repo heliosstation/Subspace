@@ -76,6 +76,11 @@
       flake = false;
     };
 
+    homebrew-felixkratz = {
+      url = "github:FelixKratz/homebrew-formulae";
+      flake = false;
+    };
+
     # Helios Station secrets [private repository]
     subsecrets = {
       url = "git+ssh://git@github.com/heliosstation/Section31.git";

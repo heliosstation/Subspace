@@ -1,5 +1,5 @@
 # Place a copy of this config to ~/.aerospace.toml
-# After that, you can edit ~/.aerospace.toml to your liking
+# After that, you can edit ~/.aerospace.toml to your liking Yahoo
 
 # You can use it to add commands that run after login to macOS user session.
 # 'start-at-login' needs to be 'true' for 'after-login-command' to work
@@ -62,7 +62,8 @@ inner.horizontal = 5
 inner.vertical = 5
 outer.left = 5
 outer.bottom = 5
-outer.top = 5
+# Sketchybar gap
+outer.top = [{ monitor."built-in" = 10 }, 45]
 outer.right = 5
 
 # 'main' binding mode declaration

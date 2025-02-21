@@ -34,6 +34,7 @@ in
             "homebrew/homebrew-bundle" = inputs.homebrew-bundle;
             "homebrew/homebrew-services" = inputs.homebrew-services;
             "nikitabobko/homebrew-tap" = inputs.homebrew-nikitabobko;
+            "FelixKratz/homebrew-formulae" = inputs.homebrew-felixkratz;
           };
         })
       ]
