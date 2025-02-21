@@ -57,6 +57,16 @@
         file = "${subsecrets}/github-ssh-key.age";
       }
       // user_readable;
+
+    # ---------------------------------------------
+    # GitHub Nix Access Tokens
+    # ---------------------------------------------
+    "nix-access-tokens" =
+      {
+        file = "${subsecrets}/nix-access-tokens.age";
+      }
+      # access-token needs to be readable by the user running the `nix` command
+      // user_readable;
   };
 
   # Place secrets in /etc/
