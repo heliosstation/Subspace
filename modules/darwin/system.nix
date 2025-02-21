@@ -166,6 +166,22 @@
 
         # Turn on app auto-update
         "com.apple.commerce".AutoUpdate = true;
+
+        "com.apple.symbolichotkeys" = {
+          AppleSymbolicHotKeys = {
+            # Disable 'Cmd + Space' for Spotlight Search so it can be used by Raycast
+            "64" = {
+              enabled = false;
+            };
+          };
+        };
+
+        # Raycast configuration
+        "com.raycast.macos" = {
+          # launch Raycast with 'Cmd + Space'
+          raycastGlobalHotkey = "Command-49";
+          raycastShouldFollowSystemAppearance = 1;
+        };
       };
 
       loginwindow = {
