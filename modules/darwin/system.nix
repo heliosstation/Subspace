@@ -33,7 +33,7 @@
         # Do not automatically rearrange spaces based on most recent use
         mru-spaces = false;
         # Group windows by application in Mission Control’s Exposé
-        expose-group-apps = false;
+        expose-group-apps = true;
       };
 
       finder = {

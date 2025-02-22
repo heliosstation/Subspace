@@ -91,6 +91,7 @@
       "gnu-tar"
 
       "sketchybar"
+      "borders"
     ];
 
     casks = [
