@@ -11,7 +11,7 @@
 #
 #e#############################################################################
 let
-  configPath = ./nvim;
+  configPath = "${config.home.homeDirectory}/home/base/tui/editors/neovim/nvim";
 in {
   xdg.configFile."nvim".source = config.lib.file.mkOutOfStoreSymlink configPath;
 
