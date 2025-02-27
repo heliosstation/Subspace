@@ -235,6 +235,11 @@ run = "move-node-to-workspace 3"
 if.app-id = 'com.apple.Safari'
 run = "move-node-to-workspace B"
 
+# Communication: Mail, Discord etc.
+[[on-window-detected]]
+if.app-id = 'ch.protonmail.desktop'
+run = "move-node-to-workspace C"
+
 # IDE
 [[on-window-detected]]
 if.app-id = 'com.microsoft.VSCode'

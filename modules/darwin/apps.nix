@@ -111,6 +111,9 @@
 
       # 3D Printing
       "bambu-studio"
+
+      # Mail
+      "proton-mail"
     ];
   };
 }
