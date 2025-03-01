@@ -11,7 +11,7 @@
 ###################################################################################
 {
   # Enable sudo authentication with Touch ID.
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   time.timeZone = "America/Los_Angeles";
 
