@@ -249,6 +249,10 @@ run = "move-node-to-workspace I"
 if.app-id = 'com.apple.dt.Xcode'
 run = "move-node-to-workspace I"
 
+[[on-window-detected]]
+if.app-id = 'dev.zed.Zed'
+run = "move-node-to-workspace I"
+
 # GenAI: ChatGPT, Claude etc.
 [[on-window-detected]]
 if.app-id = 'com.openai.chat'
@@ -262,6 +266,10 @@ run = "move-node-to-workspace M"
 # Notes
 [[on-window-detected]]
 if.app-id = 'com.apple.Notes'
+run = "move-node-to-workspace N"
+
+[[on-window-detected]]
+if.app-id = 'md.obsidian'
 run = "move-node-to-workspace N"
 
 # Terminal
