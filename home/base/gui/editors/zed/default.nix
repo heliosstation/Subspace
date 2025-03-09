@@ -8,6 +8,7 @@
     extensions = [
       "basher"
       "catppuccin"
+      "catpuccin-icons"
       "csv"
       "dart"
       "docker-compose"
@@ -30,6 +31,8 @@
       "toml"
       "xml"
       "zig"
+      "nu"
+      "justfile"
     ];
     extraPackages = with pkgs; [
       alejandra
@@ -761,6 +764,11 @@
       # 2. Load direnv configuration through the shell hook, works for POSIX shells and fish.
       #      "load_direnv": "shell_hook"
       load_direnv = "shell_hook";
+      icon_theme = {
+        mode = "system";
+        light = "Catppuccin Mocha";
+        dark = "Catppuccin Mocha";
+      };
       inline_completions = {
         # A list of globs representing files that inline completions should be disabled for.
         disabled_globs = [".env"];
