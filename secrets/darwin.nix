@@ -67,6 +67,16 @@
       }
       # access-token needs to be readable by the user running the `nix` command
       // user_readable;
+
+    # ---------------------------------------------
+    # Proxmox API Access Tokens
+    # ---------------------------------------------
+    "proxmox-api-token" =
+      {
+        file = "${subsecrets}/proxmox-api-token.age";
+      }
+      # access-token needs to be readable by the user running the `nix` command
+      // user_readable;
   };
 
   # Place secrets in /etc/
@@ -78,6 +88,10 @@
 
     "agenix/github-ssh-key" = {
       source = config.age.secrets."github-ssh-key".path;
+    };
+
+    "agenix/proxmox-api-token" = {
+      source = config.age.secrets."proxmox-api-token".path;
     };
   };
 
