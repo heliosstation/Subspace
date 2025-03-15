@@ -31,5 +31,5 @@
   systemArgs = modules // args;
 in {
   # macOS's configuration
-  darwinConfigurations.${name} = sublib.macosSystem systemArgs;
+  darwinConfigurations.${name} = sublib.darwinSystem systemArgs;
 }

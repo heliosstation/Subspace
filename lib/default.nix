@@ -1,6 +1,6 @@
 {lib, ...}: {
-  macosSystem = import ./macosSystem.nix;
-  nixosSystem = import ./nixosSystem.nix;
+  darwinSystem = import ./darwin-system.nix;
+  nixosSystem = import ./nixos-system.nix;
 
   attrs = import ./attrs.nix {inherit lib;};
 
