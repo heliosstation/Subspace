@@ -97,7 +97,6 @@
     casks = [
       "firefox"
       "google-chrome"
-      "visual-studio-code"
       "obsidian"
 
       "raycast"
