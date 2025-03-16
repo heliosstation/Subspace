@@ -1,4 +1,5 @@
 {lib, ...}: {
+  colmenaSystem = import ./colmena-system.nix;
   darwinSystem = import ./darwin-system.nix;
   nixosSystem = import ./nixos-system.nix;
 
