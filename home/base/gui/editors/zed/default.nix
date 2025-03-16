@@ -597,7 +597,11 @@
       #     "autosave": "on_focus_change",
       # 4. Save when idle for a certain amount of time:
       #     "autosave": { "after_delay": {"milliseconds": 500} },
-      autosave = "off";
+      autosave = {
+        after_delay = {
+          milliseconds = 500;
+        };
+      };
       # Settings related to the editor's tab bar.
       tab_bar = {
         # Whether or not to show the tab bar in the editor
