@@ -111,7 +111,7 @@ darwin-rollback:
 # Deploy to dhd (macOS host)
 [macos]
 [group('desktop')]
-dhd mode="default": 
+dhd mode="default":
   #!/usr/bin/env nu
   use {{utils_nu}} *;
   darwin-build "dhd" {{mode}};
