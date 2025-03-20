@@ -123,3 +123,29 @@ dhd mode="default":
 reset-launchpad:
   defaults write com.apple.dock ResetLaunchPad -bool true
   killall Dock
+
+############################################################################
+#
+# Kubernetes related commands
+#
+############################################################################
+
+[linux]
+[group('homelab')]
+asgard-k3s-server-0 mode="default":
+  #!/usr/bin/env nu
+  use {{utils_nu}} *; 
+  nixos-switch asgard-k3s-server-0 {{mode}}
+
+# Build and upload a vm image
+[linux]
+[group('homelab')]
+upload-asgard-k3s mode="default":
+  #!/usr/bin/env nu
+  use {{utils_nu}} *; 
+  upload-vm asgard-k3s-server-0 {{mode}}; 
+
+[linux]
+[group('homelab')]
+asgard-k3s:
+  colmena apply --on '@asgard-k3s-server-0' --verbose --show-trace

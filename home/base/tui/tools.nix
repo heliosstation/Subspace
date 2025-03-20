@@ -3,7 +3,11 @@
   pkgs-unstable,
   ...
 }: {
-  home.packages = with pkgs; [];
+  home.packages = with pkgs; [
+    # NixOS remote deployment tool
+    # https://github.com/zhaofengli/colmena
+    colmena
+  ];
 
   programs = {
     direnv = {
@@ -12,6 +16,7 @@
 
       enableZshIntegration = true;
       enableBashIntegration = true;
+      enableNushellIntegration = true;
     };
   };
 }

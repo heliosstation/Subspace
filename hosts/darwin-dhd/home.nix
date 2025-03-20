@@ -2,6 +2,11 @@
   programs.ssh = {
     enable = true;
     extraConfig = ''
+      Host shepherd
+        Hostname 10.69.3.102
+        IdentityFile ~/.ssh/github-heliosstation
+        IdentitiesOnly yes
+
       Host github.com
         Hostname github.com
         # github is controlled by dhd~

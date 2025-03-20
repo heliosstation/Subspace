@@ -36,11 +36,35 @@
     zpm = {
       ipv4 = "10.69.3.6";
     };
+    # shepherd = {
+    #   ipv4 = "10.69.3.102";
+    # };
 
     # ============================================
     # Kubernetes Clusters
     # ============================================
-    # TODO: Add Kubernetes Cluster nodes here
+    # IP range reserved for the K8s cluster nodes:
+    # 10.69.3.20 - 10.69.3.49
+    # Server Nodes: 10.69.3.20 - 10.69.3.29
+    asgard-k3s-server-0 = {
+      ipv4 = "10.69.3.20";
+    };
+    asgard-k3s-server-1 = {
+      ipv4 = "10.69.3.21";
+    };
+    asgard-k3s-server-2 = {
+      ipv4 = "10.69.3.22";
+    };
+    # Server Nodes: 10.69.3.30 - 10.69.3.49
+    asgard-k3s-agent-0 = {
+      ipv4 = "10.69.3.30";
+    };
+    asgard-k3s-agent-1 = {
+      ipv4 = "10.69.3.31";
+    };
+    asgard-k3s-agent-2 = {
+      ipv4 = "10.69.3.32";
+    };
   };
 
   # TODO: Enable for host/VM configuration
@@ -102,6 +126,7 @@
         publicKey = value.publicKey;
       })
       {
+        # shepherd.publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILq2LZDtOeS8MTYrDtj9CmvZ5eSAdUzalOtyrP1dixyT shepherd@nix-builder";
         # sgc.publicKey = "";
         # atlantis.publicKey = "";
       };

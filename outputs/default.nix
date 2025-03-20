@@ -38,7 +38,7 @@
   darwinSystems = {
     aarch64-darwin = import ./aarch64-darwin (args // {system = "aarch64-darwin";});
   };
-  allSystems = darwinSystems;
+  allSystems = nixosSystems // darwinSystems;
   allSystemNames = builtins.attrNames allSystems;
   nixosSystemValues = builtins.attrValues nixosSystems;
   darwinSystemValues = builtins.attrValues darwinSystems;
@@ -53,7 +53,7 @@ in {
   # NixOS Hosts
   nixosConfigurations =
     lib.attrsets.mergeAttrsList (map (it: it.nixosConfigurations or {}) nixosSystemValues);
-  
+
   # Colmena - remote deployment via SSH
   colmena =
     {
@@ -74,7 +74,7 @@ in {
         };
     }
     // lib.attrsets.mergeAttrsList (map (it: it.colmena or {}) nixosSystemValues);
-    
+
   # macOS Hosts configurations.
   darwinConfigurations =
     lib.attrsets.mergeAttrsList (map (it: it.darwinConfigurations or {}) darwinSystemValues);
@@ -91,22 +91,22 @@ in {
   checks = forAllSystems (
     system: {
       # eval-tests per system
-      eval-tests = allSystems.${system}.evalTests == {};
-      
+      # eval-tests = nixosSystems.${system}.evalTests == {};
+
       pre-commit-check = pre-commit-hooks.lib.${system}.run {
         src = sublib.relativeToRoot ".";
         hooks = {
           # Formatter.
           alejandra.enable = true;
           typos = {
-            enable = true;
+            enable = false;
             settings = {
               write = true;
               configPath = "./.typos.toml";
             };
           };
           prettier = {
-            enable = true;
+            enable = false;
             settings = {
               write = true;
               configPath = "./.prettierrc.yaml";

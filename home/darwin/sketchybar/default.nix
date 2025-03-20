@@ -1,5 +1,4 @@
-{ config, ... }: 
-{
+{config, ...}: {
   # TODO: Migrate to lua using SbarLua
   xdg.configFile = {
     "sketchybar/plugins/battery.sh" = {

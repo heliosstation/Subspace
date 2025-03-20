@@ -15,21 +15,21 @@
       #-- Nix
       nil
       # Lints and suggestions for the nix programming language
-      statix 
+      statix
       # Find and remove unused code in .nix source files
-      deadnix 
+      deadnix
       # Nix Code Formatter
-      alejandra 
+      alejandra
 
       #-- Markdown
       # Markdown Language Server
       marksman
       # Markdown Previewer
-      glow 
+      glow
 
       #-- Protocol buffer
       # Linting and Formatting
-      buf 
+      buf
     ]
     ++
     #-*- General Purpose Languages -*-#
@@ -76,15 +76,15 @@
       go
       gomodifytags
       # Generate error handling code
-      iferr 
+      iferr
       # Generate code from interfaces
-      impl 
+      impl
       # Contains tools like: godoc, goimports, etc.
-      gotools 
+      gotools
       # Go Language Server
-      gopls 
+      gopls
       # Go Debugger
-      delve 
+      delve
 
       #-- Zig
       zls

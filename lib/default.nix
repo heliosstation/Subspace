@@ -1,7 +1,10 @@
 {lib, ...}: {
   colmenaSystem = import ./colmena-system.nix;
   darwinSystem = import ./darwin-system.nix;
+  k3sServer = import ./k3s-server.nix;
+  k3sAgent = import ./k3s-agent.nix;
   nixosSystem = import ./nixos-system.nix;
+  proxmoxVm = import ./proxmox-vm.nix;
 
   attrs = import ./attrs.nix {inherit lib;};
 

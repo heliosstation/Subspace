@@ -46,3 +46,43 @@ export def darwin-switch [
 export def darwin-rollback [] {
     ./result/sw/bin/darwin-rebuild --rollback
 }
+
+# ================= NixOS related =========================
+
+# This function builds the specified NixOS configuration.
+# It can operate in two modes: normal and debug.
+# In debug mode, it shows detailed output via nix-output-monitor.
+#
+# Parameters:
+#   - name: The name of the NixOS configuration.
+#   - mode: The mode of operation ("debug" or normal).
+export def nixos-switch [
+    name: string
+    mode: string
+] {
+    if "debug" == $mode {
+        # show details via nix-output-monitor
+        nom build $".#nixosConfigurations.($name).config.system.build.toplevel" --show-trace --verbose
+        nixos-rebuild switch --use-remote-sudo --flake $".#($name)" --show-trace --verbose
+    } else {
+        nixos-rebuild switch --use-remote-sudo --flake $".#($name)"
+    }
+}
+
+# ==================== Virtual Machines related =====================
+
+# Build and upload a VM image
+export def upload-vm [
+    name: string
+    mode: string
+] {
+    let target = $".#($name)"
+    if "debug" == $mode {
+        nom build $target --show-trace --verbose
+    } else {
+        nix build $target
+    }
+
+    let remote = $"ryan@rakushun:/data/caddy/fileserver/vms/kubevirt-($name).qcow2"
+    rsync -avz --progress --copy-links --checksum result $remote
+}

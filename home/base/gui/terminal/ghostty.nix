@@ -15,12 +15,10 @@ let
   # See: https://github.com/ghostty-org/ghostty/discussions/3800
   # https://github.com/nix-community/home-manager/issues/6295
   ghosttyPkg =
-    if pkgs.stdenv.isDarwin then
-      (pkgs.writeShellScriptBin "gostty-mock" "true")
-    else
-      ghostty.packages.${pkgs.system}.default;
-in
-{
+    if pkgs.stdenv.isDarwin
+    then (pkgs.writeShellScriptBin "gostty-mock" "true")
+    else ghostty.packages.${pkgs.system}.default;
+in {
   programs.ghostty = {
     enable = true;
     package = ghosttyPkg;

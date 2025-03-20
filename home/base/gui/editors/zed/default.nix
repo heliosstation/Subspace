@@ -1133,6 +1133,7 @@
               command = "alejandra";
             };
           };
+          tab_size = 2;
         };
         pyright = {
           settings = {
